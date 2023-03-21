@@ -1,0 +1,57 @@
+\NeedsTeXFormat{LaTeX2e}
+% provided by Square Zhong <squarezhong@outlook.com>
+\ProvidesPackage{codehl}[2023/3/20 code highlighting]
+
+\RequirePackage[most]{tcolorbox}
+
+%--------------------------------------------------------------------------------
+% inline code support
+\lstdefinestyle{inlinecode}{%
+    basicstyle=\ttfamily,
+    commentstyle=\color{green!60!black},
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{red},
+    keepspaces=true,
+}
+
+%optional: sharp corners
+\DeclareTotalTCBox
+{\pycode}{sv}{verbatim}{\lstinline[style=inlinecode, language=python]|#2|}
+
+\DeclareTotalTCBox
+{\mcode}{sv}{verbatim}{\lstinline[style=inlinecode, language=matlab]|#2|}
+
+%--------------------------------------------------------------------------------
+% code block support
+\lstdefinestyle{codeblock}{%
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{green!60!black},
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{red},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    tabsize=4
+}
+
+%\newcommand{name}[num]{deﬁnition}
+\newcommand{\pyblock}[3]
+{\lstinputlisting[firstline=#2, lastline=#3, firstnumber=#2, frame=single, frame=single, style=codeblock, language=python]{#1}}
+
+\newcommand{\mblock}[3]
+{\lstinputlisting[firstline=#2, lastline=#3, firstnumber=#2, frame=single, frame=single, style=codeblock, language=matlab]{#1}}
+%--------------------------------------------------------------------------------
+
+% define colors
+\colorlet{stringcolor}{purple}
+\colorlet{keywordcolor}{magenta}
+\colorlet{exceptioncolor}{orange}
+\colorlet{functioncolor}{blue}
+\colorlet{commentcolor}{gray}
+\colorlet{promptcolor}{teal}
+\colorlet{privatemethodcolor}{violet}
+%-------------------------------------
