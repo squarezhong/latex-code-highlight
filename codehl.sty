@@ -1,6 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-% provided by Square Zhong <squarezhong@outlook.com>
-\ProvidesPackage{codehl}[2023/3/20 code highlighting]
+\ProvidesPackage{codehl}[2023/3/20 code highlighting; provided by Square Zhong <squarezhong@outlook.com>]
 
 \RequirePackage[most]{tcolorbox}
 
@@ -14,38 +13,8 @@
     keepspaces=true,
 }
 
-%optional: sharp corners
-\DeclareTotalTCBox
-{\pycode}{sv}{verbatim}{\lstinline[style=inlinecode, language=python]|#2|}
-
-\DeclareTotalTCBox
-{\mcode}{sv}{verbatim}{\lstinline[style=inlinecode, language=matlab]|#2|}
 
 %--------------------------------------------------------------------------------
-% code block support
-\lstdefinestyle{codeblock}{%
-    basicstyle=\ttfamily\footnotesize,
-    commentstyle=\color{green!60!black},
-    keywordstyle=\color{blue}\bfseries,
-    stringstyle=\color{red},
-    breakatwhitespace=false,         
-    breaklines=true,                 
-    keepspaces=true,                 
-    numbers=left,                    
-    numbersep=5pt,                  
-    showspaces=false,                
-    showstringspaces=false,
-    tabsize=4
-}
-
-%\newcommand{name}[num]{deﬁnition}
-\newcommand{\pyblock}[3]
-{\lstinputlisting[firstline=#2, lastline=#3, firstnumber=#2, frame=single, frame=single, style=codeblock, language=python]{#1}}
-
-\newcommand{\mblock}[3]
-{\lstinputlisting[firstline=#2, lastline=#3, firstnumber=#2, frame=single, frame=single, style=codeblock, language=matlab]{#1}}
-%--------------------------------------------------------------------------------
-
 % define colors
 \colorlet{stringcolor}{purple}
 \colorlet{keywordcolor}{magenta}
@@ -55,3 +24,79 @@
 \colorlet{promptcolor}{teal}
 \colorlet{privatemethodcolor}{violet}
 %-------------------------------------
+\lstdefinestyle{codeblock}{%
+    basicstyle=\ttfamily\footnotesize,
+    commentstyle=\color{commentcolor}\slshape,
+    keywordstyle=\color{keywordcolor}\bfseries,
+    stringstyle=\color{stringcolor},
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    keepspaces=true,
+    upquote=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    tabsize=4,
+    %-------------------------------------
+    % frame style
+    framexleftmargin=5mm,
+    frame=shadowbox,
+    rulesepcolor=\color{blue},
+	backgroundcolor=\color{white},
+	%-------------------------------------
+    otherkeywords={\%, \}, \{, \&, \|, :, =, -, +, * , ., **, /, //, !,%
+    	[, ], <, >, range, True, False, None, and, break, class, 'as'%
+    	continue, def, yield, del, elif, else, except, exec, finally,%
+		'or', 'for', from, global, 'if', import, 'in', lambda, not, pass,%
+		print, raise, return, try, while, assert, with, 'h'},
+    morecomment=[s]{"""}{"""},
+    %-------------------------------------
+	emph={object,type,isinstance,copy,deepcopy,zip,enumerate,%
+		reversed,list,set,len,dict,tuple,xrange,append,execfile,%
+		real,imag,reduce,str,repr},
+	emphstyle=\color{functioncolor},
+	%-------------------------------------
+	emph={[2]Exception,NameError,IndexError,SyntaxError,TypeError,%
+		ValueError,OverflowError,ZeroDivisionError},
+	emphstyle=[2]\color{exceptioncolor}\bfseries,
+	%-------------------------------------
+	emph={[3]numpy, ode, fsolve, sqrt, exp, sin, cos,arctan, arctan2, arccos,%
+		pi, array, norm, solve, dot, arange, isscalar, max, sum, flatten,%
+		shape, reshape, find, any, all, abs, plot, linspace, legend,%
+		quad, polyval, polyfit, hstack, concatenate, vstack, column_stack,%
+		empty, zeros, ones, rand, vander, grid, pcolor, eig, eigs, eigvals,%
+		svd, qr, tan, det, logspace, roll, min, mean, cumsum, cumprod, diff,%
+		vectorize, lstsq, cla, eye, xlabel, ylabel, squeeze},
+	emphstyle=[3]\color{functioncolor},
+	%-------------------------------------
+	emph={[4]__init__,__add__,__mul__,__div__,__sub__,__call__,%
+		__getitem__,__setitem__,__eq__,__ne__,__nonzero__,__rmul__,%
+		__radd__,__repr__,__str__,__get__,__truediv__,__pow__,%
+		__name__,__future__,__all__},
+	emphstyle=[4]\color{privatemethodcolor},
+	%-------------------------------------
+	emph={[5]>>>},
+	emphstyle={[5]\color{promptcolor}}
+}
+%--------------------------------------------------------------------------------
+% Inline Code Support
+% optional: sharp corners
+\DeclareTotalTCBox
+{\pycode}{sv}{verbatim}{\lstinline[style=codeblock, language=python]|#2|}
+
+\DeclareTotalTCBox
+{\mcode}{sv}{verbatim}{\lstinline[style=codeblock, language=matlab]|#2|}
+
+%--------------------------------------------------------------------------------
+% code block support
+%\newcommand{name}[num]{deﬁnition}
+\newcommand{\pyblock}[3]
+{\lstinputlisting[firstline=#2, lastline=#3, firstnumber=#2, style=codeblock, language=python]{#1}}
+
+\newcommand{\mblock}[3]
+{\lstinputlisting[firstline=#2, lastline=#3, firstnumber=#2, style=codeblock, language=matlab]{#1}}
+%--------------------------------------------------------------------------------
+% code environment support
+\lstnewenvironment{python}{\lstset{style=codeblock, language=python}}{}
+\lstnewenvironment{matlab}{\lstset{style=codeblock, language=matlab}}{}
