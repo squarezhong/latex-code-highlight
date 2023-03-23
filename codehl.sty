@@ -2,18 +2,6 @@
 \ProvidesPackage{codehl}[2023/3/20 code highlighting; provided by Square Zhong <squarezhong@outlook.com>]
 
 \RequirePackage[most]{tcolorbox}
-
-%--------------------------------------------------------------------------------
-% inline code support
-\lstdefinestyle{inlinecode}{%
-    basicstyle=\ttfamily,
-    commentstyle=\color{green!60!black},
-    keywordstyle=\color{blue}\bfseries,
-    stringstyle=\color{red},
-    keepspaces=true,
-}
-
-
 %--------------------------------------------------------------------------------
 % define colors
 \colorlet{stringcolor}{purple}
@@ -24,6 +12,7 @@
 \colorlet{promptcolor}{teal}
 \colorlet{privatemethodcolor}{violet}
 %-------------------------------------
+% code style
 \lstdefinestyle{codeblock}{%
     basicstyle=\ttfamily\footnotesize,
     commentstyle=\color{commentcolor}\slshape,
@@ -87,7 +76,6 @@
 
 \DeclareTotalTCBox
 {\mcode}{sv}{verbatim}{\lstinline[style=codeblock, language=matlab]|#2|}
-
 %--------------------------------------------------------------------------------
 % code block support
 %\newcommand{name}[num]{deﬁnition}
