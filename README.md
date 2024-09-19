@@ -2,13 +2,15 @@
 
 [![License](https://img.shields.io/github/license/squarezhong/latex-code-highlight)](LICENSE)
 
+## Update 2024-09-19
+Redundant work, minted is a much better and easier way to achieve code highlighting in LaTeX, please refer to [Code Highlight with minted in LaTeX](https://gist.github.com/squarezhong/c844bea19d4aa60719555db0a6e84975).
+
 ## Introduction
 A $\LaTeX$ package that provides both inline code and code block support for Python&Matlab.
 
 You can view the example at [.tex](example.tex)  or [.pdf](example.pdf) format.
 
 ## Usage
-
 Make sure you have put "codehl.sty" in the same directory with ".tex" file, then use the package by `\usepackage{codehl}` .
 
 ### Inline Code
